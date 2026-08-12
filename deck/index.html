@@ -9,55 +9,72 @@
      Tokens lifted from the app's src/styles/tokens.css.
      ============================================================ */
   :root {
-    --ink:      #050b18;
-    --ink-2:    #081226;
-    --ink-3:    #0b1830;
+    --ink: #050b18;
+    --ink-2: #081226;
+    --ink-3: #0b1830;
 
-    --teal:     #5eead4;
-    --cyan:     #7dd3fc;
-    --sky:      #38bdf8;
-    --blue:     #3b82f6;
-    --indigo:   #6366f1;
-    --rose:     #fb7185;
-    --ok:       #34d399;
+    --teal: #5eead4;
+    --cyan: #7dd3fc;
+    --sky: #38bdf8;
+    --blue: #3b82f6;
+    --indigo: #6366f1;
+    --rose: #fb7185;
+    --ok: #34d399;
 
-    --text:     #e8f2ff;
-    --text-2:   rgba(203, 225, 255, 0.64);
-    --text-3:   rgba(160, 190, 225, 0.42);
+    --text: #e8f2ff;
+    --text-2: rgba(203, 225, 255, 0.64);
+    --text-3: rgba(160, 190, 225, 0.42);
 
-    --line:     rgba(125, 211, 252, 0.14);
-    --line-2:   rgba(125, 211, 252, 0.30);
-    --panel:    rgba(125, 211, 252, 0.045);
-    --panel-2:  rgba(125, 211, 252, 0.08);
+    --line: rgba(125, 211, 252, 0.14);
+    --line-2: rgba(125, 211, 252, 0.3);
+    --panel: rgba(125, 211, 252, 0.045);
+    --panel-2: rgba(125, 211, 252, 0.08);
 
     /* The two trails are the thesis of the deck, so they get
        semantic colour that never doubles as decoration. */
-    --money:    #38bdf8;
-    --impact:   #5eead4;
+    --money: #38bdf8;
+    --impact: #5eead4;
 
-    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-            "Segoe UI", Inter, "Helvetica Neue", Arial, sans-serif;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo,
-            Consolas, monospace;
+    --sans:
+      -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Inter,
+      "Helvetica Neue", Arial, sans-serif;
+    --mono:
+      ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
     --t-display: clamp(2.5rem, 6.2vw, 5rem);
-    --t-h1:      clamp(1.85rem, 4.2vw, 3.25rem);
-    --t-h2:      clamp(1.15rem, 2.1vw, 1.75rem);
-    --t-body:    clamp(0.95rem, 1.25vw, 1.15rem);
-    --t-small:   clamp(0.8rem, 1vw, 0.92rem);
-    --t-label:   0.68rem;
+    --t-h1: clamp(1.85rem, 4.2vw, 3.25rem);
+    --t-h2: clamp(1.15rem, 2.1vw, 1.75rem);
+    --t-body: clamp(0.95rem, 1.25vw, 1.15rem);
+    --t-small: clamp(0.8rem, 1vw, 0.92rem);
+    --t-label: 0.68rem;
   }
 
-  * , *::before, *::after { box-sizing: border-box; }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-  html, body { height: 100%; margin: 0; }
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
 
   body {
     background:
-      radial-gradient(120% 80% at 50% -20%, rgba(56, 189, 248, 0.11), transparent 62%),
-      radial-gradient(90% 70% at 100% 110%, rgba(99, 102, 241, 0.13), transparent 64%),
+      radial-gradient(
+        120% 80% at 50% -20%,
+        rgba(56, 189, 248, 0.11),
+        transparent 62%
+      ),
+      radial-gradient(
+        90% 70% at 100% 110%,
+        rgba(99, 102, 241, 0.13),
+        transparent 64%
+      ),
       linear-gradient(180deg, var(--ink-2) 0%, var(--ink) 55%, #030711 100%);
     background-attachment: fixed;
     color: var(--text);
@@ -85,7 +102,11 @@
 
   /* ------------------------------------------------ deck frame */
 
-  .deck { position: relative; height: 100dvh; width: 100%; }
+  .deck {
+    position: relative;
+    height: 100dvh;
+    width: 100%;
+  }
 
   .slide {
     position: absolute;
@@ -94,25 +115,40 @@
     flex-direction: column;
     justify-content: center;
     gap: clamp(0.9rem, 1.8vh, 1.6rem);
-    padding: clamp(3rem, 7vh, 5rem) clamp(1.6rem, 7vw, 6.5rem) clamp(4.5rem, 9vh, 6rem);
+    padding: clamp(3rem, 7vh, 5rem) clamp(1.6rem, 7vw, 6.5rem)
+      clamp(4.5rem, 9vh, 6rem);
     overflow-y: auto;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.42s var(--ease), visibility 0.42s;
+    transition:
+      opacity 0.42s var(--ease),
+      visibility 0.42s;
   }
 
-  .slide.is-active { opacity: 1; visibility: visible; }
+  .slide.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
 
-  .wrap { width: 100%; max-width: 1140px; margin: 0 auto; }
+  .wrap {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
 
   /* staggered reveal, driven by --d on each element */
   .r {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    transition:
+      opacity 0.6s var(--ease),
+      transform 0.6s var(--ease);
     transition-delay: calc(var(--d, 0) * 90ms + 120ms);
   }
-  .is-active .r { opacity: 1; transform: none; }
+  .is-active .r {
+    opacity: 1;
+    transform: none;
+  }
 
   /* ------------------------------------------------ typography */
 
@@ -129,7 +165,7 @@
     font-size: var(--t-display);
     font-weight: 700;
     letter-spacing: -0.035em;
-    line-height: 1.0;
+    line-height: 1;
     margin: 0;
     text-wrap: balance;
   }
@@ -150,14 +186,32 @@
     margin: 0;
   }
 
-  p { margin: 0; max-width: 62ch; color: var(--text-2); }
-  p.lede { font-size: clamp(1.05rem, 1.6vw, 1.35rem); color: var(--text); max-width: 46ch; }
+  p {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--text-2);
+  }
+  p.lede {
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    color: var(--text);
+    max-width: 46ch;
+  }
 
-  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  .dim  { color: var(--text-3); }
+  .mono {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .dim {
+    color: var(--text-3);
+  }
 
   .grad {
-    background: linear-gradient(100deg, var(--teal), var(--sky) 48%, var(--blue));
+    background: linear-gradient(
+      100deg,
+      var(--teal),
+      var(--sky) 48%,
+      var(--blue)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -169,7 +223,10 @@
     color: transparent;
   }
 
-  strong { color: var(--text); font-weight: 620; }
+  strong {
+    color: var(--text);
+    font-weight: 620;
+  }
 
   /* ------------------------------------------------ components */
 
@@ -187,7 +244,11 @@
     align-items: start;
   }
 
-  .stack { display: flex; flex-direction: column; gap: clamp(0.7rem, 1.6vh, 1.15rem); }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.7rem, 1.6vh, 1.15rem);
+  }
 
   /* person card ------------------------------------------------ */
 
@@ -210,10 +271,22 @@
     letter-spacing: -0.03em;
     border: 1px solid var(--line-2);
   }
-  .avatar.contributor { color: #06202e; background: linear-gradient(140deg, var(--teal), var(--sky)); }
-  .avatar.customer    { color: #06162e; background: linear-gradient(140deg, var(--sky), var(--indigo)); }
-  .avatar.recipient   { color: #2a0c14; background: linear-gradient(140deg, #fda4af, var(--rose)); }
-  .avatar.sponsor     { color: #1d1503; background: linear-gradient(140deg, #fcd34d, #fb923c); }
+  .avatar.contributor {
+    color: #06202e;
+    background: linear-gradient(140deg, var(--teal), var(--sky));
+  }
+  .avatar.customer {
+    color: #06162e;
+    background: linear-gradient(140deg, var(--sky), var(--indigo));
+  }
+  .avatar.recipient {
+    color: #2a0c14;
+    background: linear-gradient(140deg, #fda4af, var(--rose));
+  }
+  .avatar.sponsor {
+    color: #1d1503;
+    background: linear-gradient(140deg, #fcd34d, #fb923c);
+  }
 
   .role {
     font-family: var(--mono);
@@ -225,7 +298,11 @@
 
   /* spec list --------------------------------------------------- */
 
-  .specs { display: flex; flex-direction: column; gap: 1px; }
+  .specs {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
 
   .spec {
     display: flex;
@@ -236,13 +313,29 @@
     border-bottom: 1px solid var(--line);
     font-size: var(--t-small);
   }
-  .spec:last-child { border-bottom: 0; }
-  .spec dt { color: var(--text-3); font-family: var(--mono); font-size: var(--t-label); letter-spacing: 0.16em; text-transform: uppercase; }
-  .spec dd { margin: 0; font-weight: 580; color: var(--text); }
+  .spec:last-child {
+    border-bottom: 0;
+  }
+  .spec dt {
+    color: var(--text-3);
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .spec dd {
+    margin: 0;
+    font-weight: 580;
+    color: var(--text);
+  }
 
   /* split bar --------------------------------------------------- */
 
-  .split { display: flex; flex-direction: column; gap: 0.6rem; }
+  .split {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
   .split-bar {
     display: flex;
     height: 46px;
@@ -268,7 +361,12 @@
     color: #04211c;
     background: linear-gradient(100deg, var(--teal), #4fd1c5);
   }
-  .split-legend { display: flex; justify-content: space-between; font-size: var(--t-small); color: var(--text-3); }
+  .split-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--t-small);
+    color: var(--text-3);
+  }
 
   /* flow diagram ------------------------------------------------ */
 
@@ -291,18 +389,51 @@
     flex-direction: column;
     gap: 0.3rem;
   }
-  .flow-node .who { font-family: var(--mono); font-size: var(--t-label); letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
-  .flow-node .amt { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: clamp(1.25rem, 2.3vw, 1.85rem); font-weight: 650; letter-spacing: -0.03em; }
-  .flow-node .note { font-size: var(--t-label); color: var(--text-3); letter-spacing: 0.04em; }
+  .flow-node .who {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .flow-node .amt {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+  }
+  .flow-node .note {
+    font-size: var(--t-label);
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
 
-  .flow-node.pays  { border-color: rgba(56, 189, 248, 0.34); }
-  .flow-node.pays  .amt { color: var(--sky); }
-  .flow-node.keeps { border-color: rgba(99, 102, 241, 0.34); }
-  .flow-node.keeps .amt { color: var(--indigo); }
-  .flow-node.earns { border-color: rgba(94, 234, 212, 0.38); background: rgba(94, 234, 212, 0.07); }
-  .flow-node.earns .amt { color: var(--teal); }
-  .flow-node.free  { border-color: rgba(251, 113, 133, 0.34); }
-  .flow-node.free  .amt { color: var(--rose); }
+  .flow-node.pays {
+    border-color: rgba(56, 189, 248, 0.34);
+  }
+  .flow-node.pays .amt {
+    color: var(--sky);
+  }
+  .flow-node.keeps {
+    border-color: rgba(99, 102, 241, 0.34);
+  }
+  .flow-node.keeps .amt {
+    color: var(--indigo);
+  }
+  .flow-node.earns {
+    border-color: rgba(94, 234, 212, 0.38);
+    background: rgba(94, 234, 212, 0.07);
+  }
+  .flow-node.earns .amt {
+    color: var(--teal);
+  }
+  .flow-node.free {
+    border-color: rgba(251, 113, 133, 0.34);
+  }
+  .flow-node.free .amt {
+    color: var(--rose);
+  }
 
   .flow-arrow {
     flex: 0 0 auto;
@@ -326,20 +457,51 @@
     font-size: clamp(0.85rem, 1.35vw, 1.05rem);
     letter-spacing: 0.02em;
   }
-  .trail .arrow { color: var(--text-3); }
-  .trail-money  { border-color: rgba(56, 189, 248, 0.32); background: rgba(56, 189, 248, 0.06); }
-  .trail-money  b { color: var(--sky); font-weight: 600; }
-  .trail-impact { border-color: rgba(94, 234, 212, 0.32); background: rgba(94, 234, 212, 0.06); }
-  .trail-impact b { color: var(--teal); font-weight: 600; }
+  .trail .arrow {
+    color: var(--text-3);
+  }
+  .trail-money {
+    border-color: rgba(56, 189, 248, 0.32);
+    background: rgba(56, 189, 248, 0.06);
+  }
+  .trail-money b {
+    color: var(--sky);
+    font-weight: 600;
+  }
+  .trail-impact {
+    border-color: rgba(94, 234, 212, 0.32);
+    background: rgba(94, 234, 212, 0.06);
+  }
+  .trail-impact b {
+    color: var(--teal);
+    font-weight: 600;
+  }
 
   /* table ------------------------------------------------------- */
 
-  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+  .table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
 
-  table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: var(--t-small); }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 720px;
+    font-size: var(--t-small);
+  }
 
-  th, td { text-align: left; padding: 0.72rem 1rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tbody tr:last-child td { border-bottom: 0; }
+  th,
+  td {
+    text-align: left;
+    padding: 0.72rem 1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
 
   thead th {
     font-family: var(--mono);
@@ -351,17 +513,35 @@
     background: rgba(125, 211, 252, 0.04);
   }
 
-  tbody th { font-weight: 620; color: var(--text); }
-  td { color: var(--text-2); }
-  td.pay { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-  .tag-free { color: var(--rose); font-weight: 600; }
-  .tag-earn { color: var(--teal); font-weight: 600; }
+  tbody th {
+    font-weight: 620;
+    color: var(--text);
+  }
+  td {
+    color: var(--text-2);
+  }
+  td.pay {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .tag-free {
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .tag-earn {
+    color: var(--teal);
+    font-weight: 600;
+  }
 
   /* impact card ------------------------------------------------- */
 
   .impact-card {
     border: 1px solid rgba(251, 113, 133, 0.3);
-    background: linear-gradient(180deg, rgba(251, 113, 133, 0.1), rgba(251, 113, 133, 0.02));
+    background: linear-gradient(
+      180deg,
+      rgba(251, 113, 133, 0.1),
+      rgba(251, 113, 133, 0.02)
+    );
     border-radius: 16px;
     padding: clamp(1.1rem, 2.4vw, 1.8rem);
     display: flex;
@@ -374,19 +554,68 @@
     letter-spacing: -0.01em;
     color: #ffe4e6;
   }
-  .counters { display: flex; flex-wrap: wrap; gap: 1.4rem 2.2rem; }
-  .counter { display: flex; flex-direction: column; gap: 0.15rem; }
-  .counter .v { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: clamp(1.1rem, 1.9vw, 1.45rem); font-weight: 640; letter-spacing: -0.02em; }
-  .counter .k { font-family: var(--mono); font-size: var(--t-label); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); }
-  .up { color: var(--teal); }
+  .counters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.4rem 2.2rem;
+  }
+  .counter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .counter .v {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(1.1rem, 1.9vw, 1.45rem);
+    font-weight: 640;
+    letter-spacing: -0.02em;
+  }
+  .counter .k {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .up {
+    color: var(--teal);
+  }
 
   /* tiers ------------------------------------------------------- */
 
-  .tier { display: flex; flex-direction: column; gap: 0.45rem; padding: 1rem 1.1rem; border-radius: 14px; border: 1px solid var(--line); background: var(--panel); }
-  .tier .machine { font-weight: 620; font-size: var(--t-small); }
-  .tier .gives { font-family: var(--mono); font-size: var(--t-label); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
-  .bar { height: 4px; border-radius: 99px; background: rgba(125, 211, 252, 0.14); overflow: hidden; }
-  .bar > i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--teal), var(--sky), var(--indigo)); }
+  .tier {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .tier .machine {
+    font-weight: 620;
+    font-size: var(--t-small);
+  }
+  .tier .gives {
+    font-family: var(--mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .bar {
+    height: 4px;
+    border-radius: 99px;
+    background: rgba(125, 211, 252, 0.14);
+    overflow: hidden;
+  }
+  .bar > i {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--teal), var(--sky), var(--indigo));
+  }
 
   /* quote ------------------------------------------------------- */
 
@@ -417,7 +646,10 @@
     color: var(--text-2);
     width: fit-content;
   }
-  .pill.free { border-color: rgba(251, 113, 133, 0.4); color: #fecdd3; }
+  .pill.free {
+    border-color: rgba(251, 113, 133, 0.4);
+    color: #fecdd3;
+  }
 
   .ask {
     font-family: var(--mono);
@@ -435,7 +667,9 @@
 
   .progress {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 2px;
     z-index: 50;
     background: rgba(125, 211, 252, 0.1);
@@ -472,22 +706,51 @@
     text-transform: uppercase;
     color: var(--text-3);
   }
-  .brand .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+  .brand .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+  }
 
-  .dots { display: flex; gap: 6px; pointer-events: auto; }
+  .dots {
+    display: flex;
+    gap: 6px;
+    pointer-events: auto;
+  }
   .dots button {
-    width: 7px; height: 7px; padding: 0;
+    width: 7px;
+    height: 7px;
+    padding: 0;
     border-radius: 50%;
     border: 0;
     cursor: pointer;
     background: rgba(125, 211, 252, 0.22);
-    transition: background 0.22s, transform 0.22s;
+    transition:
+      background 0.22s,
+      transform 0.22s;
   }
-  .dots button:hover { background: rgba(125, 211, 252, 0.5); }
-  .dots button[aria-current="true"] { background: var(--sky); transform: scale(1.45); box-shadow: 0 0 10px rgba(56, 189, 248, 0.8); }
-  .dots button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+  .dots button:hover {
+    background: rgba(125, 211, 252, 0.5);
+  }
+  .dots button[aria-current="true"] {
+    background: var(--sky);
+    transform: scale(1.45);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  }
+  .dots button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
 
-  .count { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: var(--t-label); letter-spacing: 0.14em; color: var(--text-3); }
+  .count {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--t-label);
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+  }
 
   .hint {
     position: fixed;
@@ -509,46 +772,80 @@
     padding: 1px 5px;
     color: var(--cyan);
   }
-  .hint.gone { opacity: 0; }
+  .hint.gone {
+    opacity: 0;
+  }
 
   @media (max-width: 720px) {
-    .chrome { left: 1.1rem; right: 1.1rem; }
-    .brand { display: none; }
+    .chrome {
+      left: 1.1rem;
+      right: 1.1rem;
+    }
+    .brand {
+      display: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .slide, .r, .progress > i { transition-duration: 0.01ms !important; }
-    .r { transform: none; }
+    .slide,
+    .r,
+    .progress > i {
+      transition-duration: 0.01ms !important;
+    }
+    .r {
+      transform: none;
+    }
   }
 </style>
 
 <div class="progress"><i id="bar"></i></div>
 
 <main class="deck" id="deck">
-
   <!-- 1 ─ title -->
   <section class="slide" aria-label="Title">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">A realistic day on the network</div>
-      <h1 class="display r" style="--d:1">Turn what your computer has<br>into <span class="grad">AI access for everyone</span>.</h1>
-      <p class="lede r" style="--d:2">How idle machines become shared AI infrastructure — followed through three people and one workload.</p>
+      <div class="eyebrow r" style="--d: 0">A realistic day on the network</div>
+      <h1 class="display r" style="--d: 1">
+        Turn what your computer has<br />into
+        <span class="grad">AI access for everyone</span>.
+      </h1>
+      <p class="lede r" style="--d: 2">
+        How idle machines become shared AI infrastructure.
+      </p>
     </div>
   </section>
 
   <!-- 2 ─ problem -->
   <section class="slide" aria-label="The problem">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The problem</div>
-      <h2 class="title r" style="--d:1">AI capability is abundant.<br><span class="grad">Access isn't.</span></h2>
-      <p class="r" style="--d:2">Who gets to use AI still depends on the machine you own and the subscriptions you can afford — not on what you're capable of.</p>
-      <div class="cols r" style="--d:3">
+      <div class="eyebrow r" style="--d: 0">The problem</div>
+      <h2 class="title r" style="--d: 1">
+        AI capability is abundant.<br /><span class="grad">Access isn't.</span>
+      </h2>
+      <p class="r" style="--d: 2">
+        Who gets to use AI still depends on the machine you own and the
+        subscriptions you can afford — not on what you're capable of.
+      </p>
+      <div class="cols r" style="--d: 3">
         <div class="panel stack">
-          <div class="counter"><span class="v" style="color:var(--sky)">~91%</span><span class="k">of the day</span></div>
-          <p style="font-size:var(--t-small)">A capable gaming GPU sits completely idle while its owner is at work.</p>
+          <div class="counter">
+            <span class="v" style="color: var(--sky)">~91%</span
+            ><span class="k">of the day</span>
+          </div>
+          <p style="font-size: var(--t-small)">
+            A capable gaming GPU sits completely idle while its owner is at
+            work.
+          </p>
         </div>
         <div class="panel stack">
-          <div class="counter"><span class="v" style="color:var(--rose)">2.6B</span><span class="k">people</span></div>
-          <p style="font-size:var(--t-small)">Have no reliable access to the AI tools reshaping education and work.</p>
+          <div class="counter">
+            <span class="v" style="color: var(--rose)">2.6B</span
+            ><span class="k">people</span>
+          </div>
+          <p style="font-size: var(--t-small)">
+            Have no reliable access to the AI tools reshaping education and
+            work.
+          </p>
         </div>
       </div>
     </div>
@@ -557,12 +854,27 @@
   <!-- 3 ─ solution -->
   <section class="slide" aria-label="The solution">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The solution</div>
-      <h2 class="title r" style="--d:1">A marketplace for what<br>your machine already has.</h2>
-      <p class="lede r" style="--d:2">AI for All turns unused <strong>compute, bandwidth, storage, and local AI models</strong> into shared AI access — letting people donate or earn from resources they aren't using, while expanding access for those who need it.</p>
-      <div class="stack r" style="--d:3">
-        <div class="trail trail-money"><b>Businesses &amp; sponsors</b><span class="arrow">→</span><b>AI for All</b><span class="arrow">→</span><b>Contributors</b><span class="dim">&nbsp;· the money trail</span></div>
-        <div class="trail trail-impact"><b>Contributors &amp; sponsors</b><span class="arrow">→</span><b>AI for All</b><span class="arrow">→</span><b>People who need AI</b><span class="dim">&nbsp;· the access trail</span></div>
+      <div class="eyebrow r" style="--d: 0">The solution</div>
+      <h2 class="title r" style="--d: 1">
+        A marketplace for what<br />your machine already has.
+      </h2>
+      <p class="lede r" style="--d: 2">
+        AI for All turns unused
+        <strong>compute, bandwidth, storage, and local AI models</strong> into
+        shared AI access — letting people donate or earn from resources they
+        aren't using, while expanding access for those who need it.
+      </p>
+      <div class="stack r" style="--d: 3">
+        <div class="trail trail-money">
+          <b>Businesses &amp; sponsors</b><span class="arrow">→</span
+          ><b>AI for All</b><span class="arrow">→</span><b>Contributors</b
+          ><span class="dim">&nbsp;· the money trail</span>
+        </div>
+        <div class="trail trail-impact">
+          <b>Contributors &amp; sponsors</b><span class="arrow">→</span
+          ><b>AI for All</b><span class="arrow">→</span><b>People who need AI</b
+          ><span class="dim">&nbsp;· the access trail</span>
+        </div>
       </div>
     </div>
   </section>
@@ -570,28 +882,53 @@
   <!-- 4 ─ Marcus -->
   <section class="slide" aria-label="Marcus, the contributor">
     <div class="wrap stack">
-      <div class="person r" style="--d:0">
+      <div class="person r" style="--d: 0">
         <div class="avatar contributor">M</div>
         <div>
           <div class="role">The contributor</div>
           <h2 class="title">Marcus</h2>
         </div>
       </div>
-      <p class="r" style="--d:1">Marcus owns a gaming PC that does nothing from 9 to 5 while he's at work. He installs AI for All and it reads what the machine can offer.</p>
-      <div class="cols r" style="--d:2">
+      <p class="r" style="--d: 1">
+        Marcus owns a gaming PC that does nothing from 9 to 5 while he's at
+        work. He installs AI for All and it reads what the machine can offer.
+      </p>
+      <div class="cols r" style="--d: 2">
         <div class="panel">
           <dl class="specs">
-            <div class="spec"><dt>GPU</dt><dd>RTX 4090 · 24 GB</dd></div>
-            <div class="spec"><dt>Memory</dt><dd>64 GB RAM</dd></div>
-            <div class="spec"><dt>Storage</dt><dd>500 GB available</dd></div>
-            <div class="spec"><dt>Bandwidth</dt><dd>1 Gbps</dd></div>
-            <div class="spec"><dt>Local AI</dt><dd>Qwen 2.5 32B</dd></div>
+            <div class="spec">
+              <dt>GPU</dt>
+              <dd>RTX 4090 · 24 GB</dd>
+            </div>
+            <div class="spec">
+              <dt>Memory</dt>
+              <dd>64 GB RAM</dd>
+            </div>
+            <div class="spec">
+              <dt>Storage</dt>
+              <dd>500 GB available</dd>
+            </div>
+            <div class="spec">
+              <dt>Bandwidth</dt>
+              <dd>1 Gbps</dd>
+            </div>
+            <div class="spec">
+              <dt>Local AI</dt>
+              <dd>Qwen 2.5 32B</dd>
+            </div>
           </dl>
         </div>
-        <div class="panel stack" style="justify-content:center">
+        <div class="panel stack" style="justify-content: center">
           <div class="role">Estimated earning potential</div>
-          <div class="counter"><span class="v grad" style="font-size:clamp(1.8rem,3.4vw,2.6rem)">$X / day</span></div>
-          <p style="font-size:var(--t-small)">He isn't donating his computer. He's letting the network use capacity he isn't using.</p>
+          <div class="counter">
+            <span class="v grad" style="font-size: clamp(1.8rem, 3.4vw, 2.6rem)"
+              >$X / day</span
+            >
+          </div>
+          <p style="font-size: var(--t-small)">
+            He isn't donating his computer. He's letting the network use
+            capacity he isn't using.
+          </p>
         </div>
       </div>
     </div>
@@ -600,9 +937,9 @@
   <!-- 5 ─ the split -->
   <section class="slide" aria-label="Marcus sets his split">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">Marcus sets the terms</div>
-      <h2 class="title r" style="--d:1">70% Earn / 30% Give</h2>
-      <div class="split r" style="--d:2">
+      <div class="eyebrow r" style="--d: 0">Marcus sets the terms</div>
+      <h2 class="title r" style="--d: 1">70% Earn / 30% Give</h2>
+      <div class="split r" style="--d: 2">
         <div class="split-bar">
           <div class="split-seg split-earn">70% EARN</div>
           <div class="split-seg split-give">30% GIVE</div>
@@ -612,34 +949,52 @@
           <span>Reserved for people who can't pay</span>
         </div>
       </div>
-      <p class="r" style="--d:3">One slider decides how his machine's spare capacity is allocated. He can change it whenever he likes — and the donated share is what makes free access possible for someone else.</p>
+      <p class="r" style="--d: 3">
+        One slider decides how his machine's spare capacity is allocated. He can
+        change it whenever he likes — and the donated share is what makes free
+        access possible for someone else.
+      </p>
     </div>
   </section>
 
   <!-- 6 ─ Acme -->
   <section class="slide" aria-label="Acme, the paying customer">
     <div class="wrap stack">
-      <div class="person r" style="--d:0">
+      <div class="person r" style="--d: 0">
         <div class="avatar customer">A</div>
         <div>
           <div class="role">The paying customer</div>
           <h2 class="title">Acme</h2>
         </div>
       </div>
-      <p class="r" style="--d:1">Acme runs an AI study app used by thousands of students. They need inference infrastructure. Normally they'd buy it from a cloud provider — instead they integrate AI for All.</p>
-      <div class="ask r" style="--d:2">“Generate 20 practice questions about photosynthesis.”</div>
-      <div class="cols r" style="--d:3">
+      <p class="r" style="--d: 1">
+        Acme runs an AI study app used by thousands of students. They need
+        inference infrastructure. Normally they'd buy it from a cloud provider —
+        instead they integrate AI for All.
+      </p>
+      <div class="ask r" style="--d: 2">
+        “Generate 20 practice questions about photosynthesis.”
+      </div>
+      <div class="cols r" style="--d: 3">
         <div class="panel stack">
           <div class="role">1 · Price</div>
-          <p style="font-size:var(--t-small)">AI for All charges Acme <strong class="mono">$0.020</strong> for the workload.</p>
+          <p style="font-size: var(--t-small)">
+            AI for All charges Acme <strong class="mono">$0.020</strong> for the
+            workload.
+          </p>
         </div>
         <div class="panel stack">
           <div class="role">2 · Route</div>
-          <p style="font-size:var(--t-small)">The network finds a node that can serve it. Marcus's machine matches.</p>
+          <p style="font-size: var(--t-small)">
+            The network finds a node that can serve it. Marcus's machine
+            matches.
+          </p>
         </div>
         <div class="panel stack">
           <div class="role">3 · Run</div>
-          <p style="font-size:var(--t-small)">His local Qwen does the inference. The answer returns to Acme's app.</p>
+          <p style="font-size: var(--t-small)">
+            His local Qwen does the inference. The answer returns to Acme's app.
+          </p>
         </div>
       </div>
     </div>
@@ -648,9 +1003,11 @@
   <!-- 7 ─ money split -->
   <section class="slide" aria-label="Where the money goes">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">One paid workload</div>
-      <h2 class="title r" style="--d:1">This is where the money<br>actually originates.</h2>
-      <div class="flow r" style="--d:2">
+      <div class="eyebrow r" style="--d: 0">One paid workload</div>
+      <h2 class="title r" style="--d: 1">
+        This is where the money<br />actually originates.
+      </h2>
+      <div class="flow r" style="--d: 2">
         <div class="flow-node pays">
           <span class="who">Acme pays</span>
           <span class="amt">$0.020</span>
@@ -669,33 +1026,51 @@
           <span class="note">platform fee</span>
         </div>
       </div>
-      <p class="r" style="--d:3">One request is pennies. But Marcus's machine processes <strong>thousands of these while he's away</strong> — and he never sees a single conversation.</p>
-      <p class="dim r" style="--d:4; font-size:var(--t-small)">Illustrative split. Not final pricing.</p>
+      <p class="r" style="--d: 3">
+        One request is pennies. But Marcus's machine processes
+        <strong>thousands of these while he's away</strong> — and he never sees
+        a single conversation.
+      </p>
+      <p class="dim r" style="--d: 4; font-size: var(--t-small)">
+        Illustrative split. Not final pricing.
+      </p>
     </div>
   </section>
 
   <!-- 8 ─ Maya -->
   <section class="slide" aria-label="Maya, the recipient">
     <div class="wrap stack">
-      <div class="person r" style="--d:0">
+      <div class="person r" style="--d: 0">
         <div class="avatar recipient">My</div>
         <div>
           <div class="role">The recipient</div>
           <h2 class="title">Maya</h2>
         </div>
       </div>
-      <p class="lede r" style="--d:1">Maya is a student whose family can't afford an AI subscription. She has nothing to contribute and pays nothing.</p>
-      <div class="ask r" style="--d:2">“Can you help me understand fractions?”</div>
-      <div class="pill free r" style="--d:3">Classified · Education · eligible for donated capacity</div>
+      <p class="lede r" style="--d: 1">
+        Maya is a student whose family can't afford an AI subscription. She has
+        nothing to contribute and pays nothing.
+      </p>
+      <div class="ask r" style="--d: 2">
+        “Can you help me understand fractions?”
+      </div>
+      <div class="pill free r" style="--d: 3">
+        Classified · Education · eligible for donated capacity
+      </div>
     </div>
   </section>
 
   <!-- 9 ─ donated route -->
   <section class="slide" aria-label="Maya's request runs on donated capacity">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The same machine, the other 30%</div>
-      <h2 class="title r" style="--d:1">Her request runs on the capacity<br>Marcus chose to <span class="grad-give">give</span>.</h2>
-      <div class="flow r" style="--d:2">
+      <div class="eyebrow r" style="--d: 0">
+        The same machine, the other 30%
+      </div>
+      <h2 class="title r" style="--d: 1">
+        Her request runs on the capacity<br />Marcus chose to
+        <span class="grad-give">give</span>.
+      </h2>
+      <div class="flow r" style="--d: 2">
         <div class="flow-node free">
           <span class="who">Maya pays</span>
           <span class="amt">$0.00</span>
@@ -704,7 +1079,11 @@
         <span class="flow-arrow">→</span>
         <div class="flow-node">
           <span class="who">Runs on</span>
-          <span class="amt" style="font-size:clamp(1rem,1.6vw,1.25rem);color:var(--cyan)">Marcus's node</span>
+          <span
+            class="amt"
+            style="font-size: clamp(1rem, 1.6vw, 1.25rem); color: var(--cyan)"
+            >Marcus's node</span
+          >
           <span class="note">donated 30% · Qwen 2.5 32B</span>
         </div>
         <span class="flow-arrow">→</span>
@@ -714,51 +1093,89 @@
           <span class="note">he chose to donate this one</span>
         </div>
       </div>
-      <p class="r" style="--d:3">No names. No prompts. Marcus never learns who Maya is or what she asked. He gets something else instead.</p>
+      <p class="r" style="--d: 3">
+        No names. No prompts. Marcus never learns who Maya is or what she asked.
+        He gets something else instead.
+      </p>
     </div>
   </section>
 
   <!-- 10 ─ what Marcus sees -->
   <section class="slide" aria-label="What Marcus sees">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">What Marcus sees</div>
-      <div class="impact-card r" style="--d:1">
-        <div class="impact-head">♥&nbsp;&nbsp;You helped someone learn today.</div>
+      <div class="eyebrow r" style="--d: 0">What Marcus sees</div>
+      <div class="impact-card r" style="--d: 1">
+        <div class="impact-head">
+          ♥&nbsp;&nbsp;You helped someone learn today.
+        </div>
         <div class="counters">
-          <div class="counter"><span class="v">127 <span class="up">→ 128</span></span><span class="k">People helped</span></div>
-          <div class="counter"><span class="v up">+42 sec</span><span class="k">Donated compute</span></div>
-          <div class="counter"><span class="v up">+1</span><span class="k">Education session</span></div>
+          <div class="counter">
+            <span class="v">127 <span class="up">→ 128</span></span
+            ><span class="k">People helped</span>
+          </div>
+          <div class="counter">
+            <span class="v up">+42 sec</span
+            ><span class="k">Donated compute</span>
+          </div>
+          <div class="counter">
+            <span class="v up">+1</span><span class="k">Education session</span>
+          </div>
         </div>
       </div>
-      <p class="r" style="--d:2">That's the entire contributor-side experience of a donated request: an outcome, a counter, and a point of light on a globe. The privacy constraint isn't a limitation — it's what makes people willing to say yes.</p>
+      <p class="r" style="--d: 2">
+        That's the entire contributor-side experience of a donated request: an
+        outcome, a counter, and a point of light on a globe. The privacy
+        constraint isn't a limitation — it's what makes people willing to say
+        yes.
+      </p>
     </div>
   </section>
 
   <!-- 11 ─ sponsors -->
   <section class="slide" aria-label="Sponsors">
     <div class="wrap stack">
-      <div class="person r" style="--d:0">
+      <div class="person r" style="--d: 0">
         <div class="avatar sponsor">$</div>
         <div>
           <div class="role">The sponsor</div>
-          <h2 class="title">“We want to fund $1M of free<br>AI access for students.”</h2>
+          <h2 class="title">
+            “We want to fund $1M of free<br />AI access for students.”
+          </h2>
         </div>
       </div>
-      <p class="r" style="--d:1">A corporation doesn't donate computers — it sponsors capacity. Now Maya's next request is <strong>free to her but paid for</strong>, and Marcus gets compensated anyway.</p>
-      <div class="trail trail-money r" style="--d:2"><b>Sponsor</b><span class="arrow">→</span><b>AI for All</b><span class="arrow">→</span><b>Marcus</b><span class="arrow">→</span><span style="color:var(--rose);font-weight:600">Maya, free</span></div>
-      <p class="lede r" style="--d:3">It's a scholarship. Free to the recipient doesn't mean nobody paid for it.</p>
+      <p class="r" style="--d: 1">
+        A corporation doesn't donate computers — it sponsors capacity. Now
+        Maya's next request is <strong>free to her but paid for</strong>, and
+        Marcus gets compensated anyway.
+      </p>
+      <div class="trail trail-money r" style="--d: 2">
+        <b>Sponsor</b><span class="arrow">→</span><b>AI for All</b
+        ><span class="arrow">→</span><b>Marcus</b><span class="arrow">→</span
+        ><span style="color: var(--rose); font-weight: 600">Maya, free</span>
+      </div>
+      <p class="lede r" style="--d: 3">
+        It's a scholarship. Free to the recipient doesn't mean nobody paid for
+        it.
+      </p>
     </div>
   </section>
 
   <!-- 12 ─ the table -->
   <section class="slide" aria-label="The ecosystem">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The ecosystem</div>
-      <h2 class="title r" style="--d:1">Everyone gives something different.</h2>
-      <div class="table-scroll r" style="--d:2">
+      <div class="eyebrow r" style="--d: 0">The ecosystem</div>
+      <h2 class="title r" style="--d: 1">
+        Everyone gives something different.
+      </h2>
+      <div class="table-scroll r" style="--d: 2">
         <table>
           <thead>
-            <tr><th scope="col">Who</th><th scope="col">Gives</th><th scope="col">Pays</th><th scope="col">Receives</th></tr>
+            <tr>
+              <th scope="col">Who</th>
+              <th scope="col">Gives</th>
+              <th scope="col">Pays</th>
+              <th scope="col">Receives</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -800,23 +1217,29 @@
   <!-- 13 ─ capability -->
   <section class="slide" aria-label="Capability, not bandwidth">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The part worth emphasising</div>
-      <h2 class="title r" style="--d:1">Marcus isn't donating bandwidth.<br>He's contributing <span class="grad">capability</span>.</h2>
-      <p class="r" style="--d:2">Every machine offers a different mix — and the more useful the mix, the more valuable the node.</p>
-      <div class="cols r" style="--d:3">
+      <div class="eyebrow r" style="--d: 0">The part worth emphasising</div>
+      <h2 class="title r" style="--d: 1">
+        Marcus isn't donating bandwidth.<br />He's contributing
+        <span class="grad">capability</span>.
+      </h2>
+      <p class="r" style="--d: 2">
+        Every machine offers a different mix — and the more useful the mix, the
+        more valuable the node.
+      </p>
+      <div class="cols r" style="--d: 3">
         <div class="tier">
           <span class="machine">Laptop, good internet</span>
-          <div class="bar"><i style="width:32%"></i></div>
+          <div class="bar"><i style="width: 32%"></i></div>
           <span class="gives">Bandwidth · model caching</span>
         </div>
         <div class="tier">
           <span class="machine">Mac Studio</span>
-          <div class="bar"><i style="width:66%"></i></div>
+          <div class="bar"><i style="width: 66%"></i></div>
           <span class="gives">Local inference</span>
         </div>
         <div class="tier">
           <span class="machine">RTX 4090 + popular models</span>
-          <div class="bar"><i style="width:100%"></i></div>
+          <div class="bar"><i style="width: 100%"></i></div>
           <span class="gives">High-value AI node</span>
         </div>
       </div>
@@ -826,25 +1249,52 @@
   <!-- 14 ─ the pitch -->
   <section class="slide" aria-label="The 30 second pitch">
     <div class="wrap stack">
-      <div class="eyebrow r" style="--d:0">The whole thing in 30 seconds</div>
-      <blockquote class="r" style="--d:1">
-        <p>Marcus has a powerful gaming PC that sits idle while he's at work. He joins AI for All and decides to earn from 70% of his available capacity and donate 30%.</p>
-        <p>A company that needs AI infrastructure pays us to process its workloads. We route an appropriate workload to Marcus's computer, his local AI processes it, Marcus gets paid, and we take a small platform fee.</p>
-        <p>Then Maya, a student who can't afford AI, needs tutoring. She pays nothing. Her request uses the capacity Marcus chose to donate — or capacity funded by a corporate sponsor. Marcus never sees her conversation; he just sees that his computer helped give another person access to AI.</p>
-        <p><strong>So businesses fund the marketplace, contributors provide the infrastructure, and donated or sponsored capacity expands access to people who otherwise wouldn't have it.</strong></p>
+      <div class="eyebrow r" style="--d: 0">The whole thing in 30 seconds</div>
+      <blockquote class="r" style="--d: 1">
+        <p>
+          Marcus has a powerful gaming PC that sits idle while he's at work. He
+          joins AI for All and decides to earn from 70% of his available
+          capacity and donate 30%.
+        </p>
+        <p>
+          A company that needs AI infrastructure pays us to process its
+          workloads. We route an appropriate workload to Marcus's computer, his
+          local AI processes it, Marcus gets paid, and we take a small platform
+          fee.
+        </p>
+        <p>
+          Then Maya, a student who can't afford AI, needs tutoring. She pays
+          nothing. Her request uses the capacity Marcus chose to donate — or
+          capacity funded by a corporate sponsor. Marcus never sees her
+          conversation; he just sees that his computer helped give another
+          person access to AI.
+        </p>
+        <p>
+          <strong
+            >So businesses fund the marketplace, contributors provide the
+            infrastructure, and donated or sponsored capacity expands access to
+            people who otherwise wouldn't have it.</strong
+          >
+        </p>
       </blockquote>
     </div>
   </section>
 
   <!-- 15 ─ close -->
   <section class="slide" aria-label="Close">
-    <div class="wrap stack" style="align-items:flex-start">
-      <div class="eyebrow r" style="--d:0">AI for All</div>
-      <h2 class="display r" style="--d:1">Turn what your computer has<br>into <span class="grad">AI access for everyone</span>.</h2>
-      <p class="r" style="--d:2">Unused compute, bandwidth, storage and local AI models become shared access — so a world where everyone can use AI doesn't require everyone to buy it.</p>
+    <div class="wrap stack" style="align-items: flex-start">
+      <div class="eyebrow r" style="--d: 0">AI for All</div>
+      <h2 class="display r" style="--d: 1">
+        Turn what your computer has<br />into
+        <span class="grad">AI access for everyone</span>.
+      </h2>
+      <p class="r" style="--d: 2">
+        Unused compute, bandwidth, storage and local AI models become shared
+        access — so a world where everyone can use AI doesn't require everyone
+        to buy it.
+      </p>
     </div>
   </section>
-
 </main>
 
 <div class="chrome">
@@ -853,61 +1303,88 @@
   <div class="count mono" id="count">01 / 15</div>
 </div>
 
-<div class="hint" id="hint"><kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>F</kbd> fullscreen</div>
+<div class="hint" id="hint">
+  <kbd>←</kbd> <kbd>→</kbd> to navigate · <kbd>F</kbd> fullscreen
+</div>
 
 <script>
   (function () {
-    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
-    var bar    = document.getElementById('bar');
-    var dotsEl = document.getElementById('dots');
-    var countEl= document.getElementById('count');
-    var hint   = document.getElementById('hint');
+    var slides = Array.prototype.slice.call(
+      document.querySelectorAll(".slide"),
+    );
+    var bar = document.getElementById("bar");
+    var dotsEl = document.getElementById("dots");
+    var countEl = document.getElementById("count");
+    var hint = document.getElementById("hint");
     var i = 0;
 
-    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var pad = function (n) {
+      return (n < 10 ? "0" : "") + n;
+    };
 
     slides.forEach(function (s, n) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.setAttribute('role', 'tab');
-      b.setAttribute('aria-label', 'Slide ' + (n + 1));
-      b.addEventListener('click', function () { go(n); });
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", "Slide " + (n + 1));
+      b.addEventListener("click", function () {
+        go(n);
+      });
       dotsEl.appendChild(b);
     });
     var dots = Array.prototype.slice.call(dotsEl.children);
 
     function go(n) {
       i = Math.max(0, Math.min(slides.length - 1, n));
-      slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-      dots.forEach(function (d, k) { d.setAttribute('aria-current', k === i ? 'true' : 'false'); });
-      bar.style.width = ((i + 1) / slides.length * 100) + '%';
-      countEl.textContent = pad(i + 1) + ' / ' + pad(slides.length);
-      if (i > 0) hint.classList.add('gone');
-      if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
+      slides.forEach(function (s, k) {
+        s.classList.toggle("is-active", k === i);
+      });
+      dots.forEach(function (d, k) {
+        d.setAttribute("aria-current", k === i ? "true" : "false");
+      });
+      bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+      countEl.textContent = pad(i + 1) + " / " + pad(slides.length);
+      if (i > 0) hint.classList.add("gone");
+      if (location.hash !== "#" + (i + 1))
+        history.replaceState(null, "", "#" + (i + 1));
     }
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener("keydown", function (e) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       var k = e.key;
-      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter') { e.preventDefault(); go(i + 1); }
-      else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace') { e.preventDefault(); go(i - 1); }
-      else if (k === 'Home') { e.preventDefault(); go(0); }
-      else if (k === 'End') { e.preventDefault(); go(slides.length - 1); }
-      else if (k === 'f' || k === 'F') {
+      if (
+        k === "ArrowRight" ||
+        k === "PageDown" ||
+        k === " " ||
+        k === "Enter"
+      ) {
+        e.preventDefault();
+        go(i + 1);
+      } else if (k === "ArrowLeft" || k === "PageUp" || k === "Backspace") {
+        e.preventDefault();
+        go(i - 1);
+      } else if (k === "Home") {
+        e.preventDefault();
+        go(0);
+      } else if (k === "End") {
+        e.preventDefault();
+        go(slides.length - 1);
+      } else if (k === "f" || k === "F") {
         if (document.fullscreenElement) document.exitFullscreen();
-        else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+        else if (document.documentElement.requestFullscreen)
+          document.documentElement.requestFullscreen();
       }
     });
 
     // Click the right or left third of the page to step through.
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('button, a')) return;
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("button, a")) return;
       var x = e.clientX / window.innerWidth;
       if (x > 0.68) go(i + 1);
       else if (x < 0.32) go(i - 1);
     });
 
-    var start = parseInt((location.hash || '').slice(1), 10);
+    var start = parseInt((location.hash || "").slice(1), 10);
     go(isNaN(start) ? 0 : start - 1);
   })();
 </script>
