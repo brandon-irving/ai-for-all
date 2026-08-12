@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400"
+     role="img" aria-label="Rotating network globe">
+  <title>AI for All — HUD network globe</title>
+  <desc>Wireframe globe with a rotating meridian sweep, pulsing contributor nodes and
+        travelling inference routes. Transparent background. Pure SVG + CSS.</desc>
+
+  <style>
+    /* --- rotation -------------------------------------------------------
+       Meridians are full ellipses. A meridian great-circle on a sphere
+       projects to an ellipse whose horizontal radius is R*cos(theta), so
+       spinning the globe = scaling each ellipse in X by cos(theta).
+       scaleX is used rather than animating rx: it is GPU-composited and
+       universally supported, and it may go negative (the far half swinging
+       to the near side) which rx cannot.
+       The keyframes below sample cos() every 45 degrees so meridians ease
+       at the limbs instead of sliding at constant speed. */
+    @keyframes afa-spin {
+      0%    { transform: scaleX( 1.000); }
+      12.5% { transform: scaleX( 0.707); }
+      25%   { transform: scaleX( 0.000); }
+      37.5% { transform: scaleX(-0.707); }
+      50%   { transform: scaleX(-1.000); }
+      62.5% { transform: scaleX(-0.707); }
+      75%   { transform: scaleX( 0.000); }
+      87.5% { transform: scaleX( 0.707); }
+      100%  { transform: scaleX( 1.000); }
+    }
+    .afa-mer {
+      transform-origin: 200px 200px;
+      animation: afa-spin 24s linear infinite;
+    }
+    /* Six meridians 30 degrees apart = one sixth of the cycle each. The delays
+       live inline on the elements: :nth-of-type() counts siblings by element
+       name, and the parallels above are ellipses too, so a type selector here
+       would silently address the wrong nodes. */
+
+    /* --- nodes ---------------------------------------------------------- */
+    @keyframes afa-pulse {
+      0%, 100% { opacity: .35; transform: scale(.75); }
+      50%      { opacity: 1;   transform: scale(1.35); }
+    }
+    .afa-node {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: afa-pulse 3.2s ease-in-out infinite;
+    }
+
+    /* --- routes --------------------------------------------------------- */
+    @keyframes afa-route { to { stroke-dashoffset: -120; } }
+    .afa-route {
+      stroke-dasharray: 18 102;
+      animation: afa-route 3s linear infinite;
+    }
+
+    /* --- halo ----------------------------------------------------------- */
+    @keyframes afa-breathe {
+      0%, 100% { opacity: .40; }
+      50%      { opacity: .70; }
+    }
+    .afa-halo { animation: afa-breathe 6s ease-in-out infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .afa-mer, .afa-node, .afa-route, .afa-halo { animation: none; }
+    }
+  </style>
+
+  <defs>
+    <radialGradient id="afaHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="55%"  stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="82%"  stop-color="#38BDF8" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#1E3A8A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="afaBody" cx="38%" cy="32%" r="78%">
+      <stop offset="0%"   stop-color="#1E4E8C" stop-opacity=".34"/>
+      <stop offset="60%"  stop-color="#0C2350" stop-opacity=".34"/>
+      <stop offset="100%" stop-color="#050B1C" stop-opacity=".52"/>
+    </radialGradient>
+    <linearGradient id="afaWire" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#93DBFD" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity=".62"/>
+    </linearGradient>
+    <radialGradient id="afaDot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="45%"  stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity=".15"/>
+    </radialGradient>
+
+    <filter id="afaGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <clipPath id="afaSphere"><circle cx="200" cy="200" r="150"/></clipPath>
+  </defs>
+
+  <!-- atmosphere -->
+  <circle class="afa-halo" cx="200" cy="200" r="186" fill="url(#afaHalo)"/>
+
+  <!-- sphere body -->
+  <circle cx="200" cy="200" r="150" fill="url(#afaBody)"/>
+
+  <!-- wireframe, clipped so nothing escapes the limb -->
+  <g clip-path="url(#afaSphere)" fill="none" stroke="url(#afaWire)" stroke-width="1.1">
+    <g transform="rotate(-12 200 200)">
+      <!-- parallels: rx = R*cos(lat), cy = 200 - R*sin(lat) -->
+      <ellipse cx="200" cy="70"  rx="75"  ry="19"/>
+      <ellipse cx="200" cy="104" rx="115" ry="29"/>
+      <ellipse cx="200" cy="149" rx="141" ry="35"/>
+      <ellipse cx="200" cy="200" rx="150" ry="37" stroke-opacity=".9"/>
+      <ellipse cx="200" cy="251" rx="141" ry="35"/>
+      <ellipse cx="200" cy="296" rx="115" ry="29"/>
+      <ellipse cx="200" cy="330" rx="75"  ry="19"/>
+
+      <!-- Meridians: scaleX animated, see stylesheet. A polar great circle
+           repeats every 180deg, so eight meridians 22.5deg apart are spread
+           across HALF the 24s cycle (0 to -10.5s). Spreading them over the
+           full cycle would make the 0s and -12s elements the same circle. -->
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay:    0s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay: -1.5s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay:   -3s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay: -4.5s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay:   -6s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay: -7.5s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay:   -9s"/>
+      <ellipse class="afa-mer" cx="200" cy="200" rx="150" ry="150" style="animation-delay:-10.5s"/>
+    </g>
+  </g>
+
+  <!-- inference routes between contributor nodes -->
+  <g clip-path="url(#afaSphere)" fill="none" stroke="#7DD3FC" stroke-width="1.6"
+     stroke-linecap="round" opacity=".9">
+    <path class="afa-route" d="M150 140 Q 196 96 262 128"  style="animation-delay:  0s"/>
+    <path class="afa-route" d="M120 205 Q 178 168 275 175" style="animation-delay:-.8s"/>
+    <path class="afa-route" d="M160 275 Q 210 232 290 215" style="animation-delay:-1.6s"/>
+    <path class="afa-route" d="M215 300 Q 172 262 108 232" style="animation-delay:-2.3s"/>
+    <path class="afa-route" d="M262 128 Q 292 178 255 240" style="animation-delay:-1.1s"/>
+  </g>
+
+  <!-- contributor nodes -->
+  <g clip-path="url(#afaSphere)" filter="url(#afaGlow)" fill="url(#afaDot)">
+    <circle class="afa-node" cx="150" cy="140" r="4"   style="animation-delay:-.2s"/>
+    <circle class="afa-node" cx="262" cy="128" r="3.4" style="animation-delay:-1.4s"/>
+    <circle class="afa-node" cx="275" cy="175" r="3"   style="animation-delay:-2.6s"/>
+    <circle class="afa-node" cx="120" cy="205" r="3.6" style="animation-delay:-.9s"/>
+    <circle class="afa-node" cx="185" cy="215" r="4.4" style="animation-delay:-2.1s"/>
+    <circle class="afa-node" cx="255" cy="240" r="3.2" style="animation-delay:-1.7s"/>
+    <circle class="afa-node" cx="160" cy="275" r="3.8" style="animation-delay:-.5s"/>
+    <circle class="afa-node" cx="215" cy="300" r="3"   style="animation-delay:-2.9s"/>
+    <circle class="afa-node" cx="108" cy="232" r="2.6" style="animation-delay:-1.2s"/>
+    <circle class="afa-node" cx="290" cy="215" r="3.4" style="animation-delay:-2.4s"/>
+    <circle class="afa-node" cx="228" cy="165" r="2.8" style="animation-delay:-.7s"/>
+    <circle class="afa-node" cx="172" cy="182" r="2.4" style="animation-delay:-1.9s"/>
+  </g>
+
+  <!-- limb -->
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#60A5FA" stroke-opacity=".55" stroke-width="1.2"/>
+</svg>

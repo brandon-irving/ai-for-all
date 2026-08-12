@@ -1,0 +1,259 @@
+.rf {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  background:
+    radial-gradient(90% 60% at 50% 40%, rgba(11, 26, 52, 0.94), rgba(4, 10, 22, 0.985) 70%);
+  backdrop-filter: blur(10px);
+}
+
+.rf-inner {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  padding: 6px 18px 18px;
+  overflow: hidden;
+}
+
+.rf-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  position: relative;
+}
+
+.rf-kicker { margin-bottom: 2px; }
+
+.rf-title {
+  font-size: 19px;
+  font-weight: 640;
+  letter-spacing: 0.16em;
+  color: var(--text);
+}
+.rf-title.sm { font-size: 13px; letter-spacing: 0.13em; color: var(--text-2); font-weight: 560; }
+
+/* ---------------------------------------------------------- received */
+
+.rf-burst {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid var(--sky);
+}
+
+.rf-ico {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  color: var(--cyan);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.05) 70%);
+  border: 1px solid var(--line-2);
+  box-shadow: 0 0 34px rgba(56, 189, 248, 0.35);
+}
+
+.rf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--line-2);
+  background: var(--panel-2);
+  font-size: 13.5px;
+  font-weight: 560;
+  color: var(--cyan);
+}
+
+.rf-privacy { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; }
+
+/* ---------------------------------------------------------- chain */
+
+.rf-chain { display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 280px; }
+
+.chain-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  text-align: left;
+  transition: opacity 0.4s, color 0.4s;
+}
+.chain-row.off { opacity: 0.3; }
+.chain-row.on { opacity: 1; }
+.chain-row.done { opacity: 0.7; }
+
+.chain-node {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: #071227;
+  color: var(--teal);
+}
+.chain-row.on .chain-node {
+  border-color: var(--sky);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+}
+
+.chain-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+.chain-row.on .chain-dot { animation: ping 1.6s ease-out infinite; }
+
+.chain-line {
+  position: absolute;
+  left: 11px;
+  top: 30px;
+  width: 1px;
+  height: 18px;
+  background: var(--line-2);
+}
+
+.chain-label { font-size: 13.5px; font-weight: 520; }
+
+.rf-reqs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; justify-content: flex-start; }
+
+.rf-req {
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  color: var(--text-2);
+}
+
+/* ---------------------------------------------------------- routing */
+
+.rf-scanline { font-size: 10px; letter-spacing: 0.12em; color: var(--cyan); opacity: 0.7; }
+
+.rf-selected {
+  padding: 12px 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(94, 234, 212, 0.34);
+  background: linear-gradient(180deg, rgba(94, 234, 212, 0.12), rgba(94, 234, 212, 0.03));
+  box-shadow: 0 0 28px rgba(94, 234, 212, 0.18);
+}
+
+.rf-sel-name { font-size: 15.5px; font-weight: 640; letter-spacing: -0.01em; }
+
+.rf-sel-tag {
+  margin-left: 6px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--teal);
+  vertical-align: 2px;
+}
+
+.rf-sel-meta { font-size: 10.5px; letter-spacing: 0.08em; margin-top: 3px; }
+
+/* ---------------------------------------------------------- inference */
+
+.rf-model { font-size: 16px; font-weight: 620; letter-spacing: -0.01em; }
+
+.rf-metrics { display: flex; gap: 26px; }
+
+.rf-metric-v { font-size: 19px; font-weight: 600; color: var(--cyan); letter-spacing: -0.02em; }
+.rf-metric-l { font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 2px; }
+
+.rf-gpu-bar {
+  width: 100%;
+  max-width: 250px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(125, 211, 252, 0.12);
+  overflow: hidden;
+}
+.rf-gpu-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--teal), var(--sky));
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+.rf-secure {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+  padding: 11px 15px;
+  border-radius: 13px;
+  border: 1px solid rgba(52, 211, 153, 0.26);
+  background: rgba(52, 211, 153, 0.07);
+  color: var(--ok);
+  margin-top: 2px;
+}
+.rf-secure-t { font-size: 12.5px; font-weight: 620; color: #a7f3d0; }
+.rf-secure-d { font-size: 11px; }
+
+/* ---------------------------------------------------------- delivered */
+
+.rf-check {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  color: var(--ok);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.25), transparent 70%);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 0 44px rgba(52, 211, 153, 0.32);
+}
+
+/* ---------------------------------------------------------- impact */
+
+.rf-impact { gap: 16px; }
+
+.rf-heart {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  color: var(--heart);
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.24), transparent 70%);
+  filter: drop-shadow(0 0 26px rgba(251, 113, 133, 0.6));
+}
+
+.rf-heart-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 108px;
+  height: 108px;
+  margin: -54px 0 0 -54px;
+  border-radius: 50%;
+  border: 1px solid rgba(251, 113, 133, 0.5);
+}
+
+.rf-impact-t {
+  font-size: 17px;
+  font-weight: 640;
+  letter-spacing: 0.2em;
+  background: linear-gradient(100deg, #fda4af, #fb7185 50%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rf-impact-d { font-size: 12.5px; max-width: 250px; }

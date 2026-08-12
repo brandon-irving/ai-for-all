@@ -1,0 +1,47 @@
+:root {
+  /* Ground — the assets are authored for a deep navy field. */
+  --bg: #050b18;
+  --bg-2: #081226;
+  --bg-3: #0b1830;
+
+  /* Brand ramp, straight from the asset kit README. */
+  --teal: #5eead4;
+  --cyan: #7dd3fc;
+  --cyan-2: #93dbfd;
+  --sky: #38bdf8;
+  --blue: #3b82f6;
+  --indigo: #6366f1;
+
+  /* Semantic */
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --heart: #fb7185;
+  --gold: #fcd34d;
+
+  /* Surfaces */
+  --panel: rgba(125, 211, 252, 0.045);
+  --panel-2: rgba(125, 211, 252, 0.075);
+  --panel-3: rgba(125, 211, 252, 0.11);
+  --line: rgba(125, 211, 252, 0.14);
+  --line-2: rgba(125, 211, 252, 0.26);
+  --line-3: rgba(125, 211, 252, 0.44);
+
+  /* Text */
+  --text: #e8f2ff;
+  --text-2: rgba(203, 225, 255, 0.64);
+  --text-3: rgba(160, 190, 225, 0.42);
+
+  /* Glows */
+  --glow-sky: 0 0 0 1px rgba(56, 189, 248, 0.3), 0 0 24px rgba(56, 189, 248, 0.28);
+  --glow-soft: 0 0 40px rgba(56, 189, 248, 0.16);
+
+  --radius: 16px;
+  --radius-sm: 11px;
+  --radius-lg: 22px;
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

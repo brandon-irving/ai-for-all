@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160"
+     role="img" aria-label="AI inference core">
+  <title>AI for All — inference core</title>
+  <desc>Isometric wireframe cube inside a rotating containment ring, with a pulsing
+        core. Used to represent a model actively running inference.</desc>
+
+  <style>
+    @keyframes afa-cw  { to { transform: rotate(360deg); } }
+    @keyframes afa-ccw { to { transform: rotate(-360deg); } }
+    @keyframes afa-core {
+      0%, 100% { opacity: .55; transform: scale(.82); }
+      50%      { opacity: 1;   transform: scale(1.12); }
+    }
+    @keyframes afa-lift {
+      0%, 100% { transform: translateY(-2px); }
+      50%      { transform: translateY(2px); }
+    }
+    .afa-ring-a { transform-origin: 80px 80px; animation: afa-cw  14s linear infinite; }
+    .afa-ring-b { transform-origin: 80px 80px; animation: afa-ccw 22s linear infinite; }
+    .afa-cube   { transform-origin: 80px 80px; animation: afa-lift 5s ease-in-out infinite; }
+    .afa-core   { transform-box: fill-box; transform-origin: center;
+                  animation: afa-core 2.4s ease-in-out infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .afa-ring-a, .afa-ring-b, .afa-cube, .afa-core { animation: none; }
+    }
+  </style>
+
+  <defs>
+    <linearGradient id="afaTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1E5F9E" stop-opacity=".62"/>
+      <stop offset="100%" stop-color="#0B2E5C" stop-opacity=".48"/>
+    </linearGradient>
+    <linearGradient id="afaLeftF" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#12306B" stop-opacity=".70"/>
+      <stop offset="100%" stop-color="#071634" stop-opacity=".78"/>
+    </linearGradient>
+    <linearGradient id="afaRightF" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2A2A7A" stop-opacity=".70"/>
+      <stop offset="100%" stop-color="#071634" stop-opacity=".76"/>
+    </linearGradient>
+    <radialGradient id="afaCoreG" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFFFFF"/>
+      <stop offset="40%"  stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="afaAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#38BDF8" stop-opacity=".30"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="afaCoreGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="80" r="72" fill="url(#afaAura)"/>
+
+  <!-- containment rings -->
+  <g fill="none" stroke-linecap="round">
+    <circle class="afa-ring-a" cx="80" cy="80" r="64"
+            stroke="#38BDF8" stroke-opacity=".45" stroke-width="1.2"
+            stroke-dasharray="26 14"/>
+    <circle class="afa-ring-b" cx="80" cy="80" r="55"
+            stroke="#6366F1" stroke-opacity=".38" stroke-width="1"
+            stroke-dasharray="4 12"/>
+  </g>
+
+  <!-- isometric cube -->
+  <g class="afa-cube">
+    <!-- faces -->
+    <path d="M80 42 L112.9 61 L80 80 L47.1 61 Z" fill="url(#afaTop)"/>
+    <path d="M47.1 61 L80 80 L80 118 L47.1 99 Z" fill="url(#afaLeftF)"/>
+    <path d="M112.9 61 L80 80 L80 118 L112.9 99 Z" fill="url(#afaRightF)"/>
+    <!-- edges -->
+    <g fill="none" stroke="#7DD3FC" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M80 42 L112.9 61 L112.9 99 L80 118 L47.1 99 L47.1 61 Z"/>
+      <path d="M80 80 L80 118 M80 80 L47.1 61 M80 80 L112.9 61" stroke-opacity=".7"/>
+    </g>
+    <!-- vertex nodes -->
+    <g fill="#E0F2FE">
+      <circle cx="80"    cy="42" r="2.2"/>
+      <circle cx="112.9" cy="61" r="2.2"/>
+      <circle cx="112.9" cy="99" r="2.2"/>
+      <circle cx="80"    cy="118" r="2.2"/>
+      <circle cx="47.1"  cy="99" r="2.2"/>
+      <circle cx="47.1"  cy="61" r="2.2"/>
+    </g>
+    <!-- core -->
+    <g class="afa-core" filter="url(#afaCoreGlow)">
+      <circle cx="80" cy="80" r="16" fill="url(#afaCoreG)"/>
+      <circle cx="80" cy="80" r="4.5" fill="#FFFFFF"/>
+    </g>
+  </g>
+</svg>
